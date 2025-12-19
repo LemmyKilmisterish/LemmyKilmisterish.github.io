@@ -140,6 +140,96 @@ p:last-child{ margin-bottom: 0; }
   color: var(--muted);
   font-size: 1.02rem;
 }
+
+/* Swap wrapper */
+.profile-swap-wrap{
+  position: relative;
+}
+
+/* Visually hide checkbox but keep it accessible */
+.profile-toggle{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Focus ring for keyboard users */
+.profile-toggle:focus-visible + .profile-swap{
+  box-shadow: 0 0 0 3px rgba(75, 132, 195, .45);
+}
+
+/* Click/tap target */
+.profile-swap{
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  line-height: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  margin-left: 0;
+  max-width: 220px;
+
+}
+
+/* Images */
+.profile-swap .profile-img{
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 160ms ease, transform 260ms ease;
+}
+
+/* Second image overlays the first */
+.profile-swap .profile-img--2{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.01);
+}
+
+/* Desktop: hover swaps (no sticky toggle on desktop) */
+@media (hover: hover) and (pointer: fine){
+  .profile-swap:hover .profile-img--1{
+    opacity: 0;
+    transform: scale(0.99);
+  }
+  .profile-swap:hover .profile-img--2{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Mobile/touch: tap toggles checked state (tap again returns) */
+@media (hover: none) and (pointer: coarse){
+  .profile-toggle:checked + .profile-swap .profile-img--1{
+    opacity: 0;
+    transform: scale(0.99);
+  }
+  .profile-toggle:checked + .profile-swap .profile-img--2{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .profile-swap .profile-img{
+    transition: none;
+  }
+}
+
+/*
 .profile-swap{
   position: relative;
   display: block;
@@ -149,7 +239,7 @@ p:last-child{ margin-bottom: 0; }
   border: 0;
   background: transparent;
   cursor: pointer;
-  line-height: 0; /* removes extra inline-gap behavior */
+  line-height: 0; 
   margin-left: 0;
   max-width: 220px;
 }
@@ -170,7 +260,6 @@ p:last-child{ margin-bottom: 0; }
   transition: opacity 160ms ease, transform 260ms ease;
 }
 
-/* Second image sits on top */
 .profile-swap .profile-img--2{
   position: absolute;
   inset: 0;
@@ -181,7 +270,6 @@ p:last-child{ margin-bottom: 0; }
   transform: scale(1.01);
 }
 
-/* Swap states: hover (mouse) + focus/active (touch) */
 .profile-swap:is(:hover, :focus, :active) .profile-img--1{
   opacity: 0;
   transform: scale(0.99);
@@ -190,7 +278,7 @@ p:last-child{ margin-bottom: 0; }
 .profile-swap:is(:hover, :focus, :active) .profile-img--2{
   opacity: 1;
   transform: scale(1);
-}
+}*/
 
 .clean-list{
   list-style: none;
