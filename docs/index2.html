@@ -21,13 +21,16 @@
   <meta name="twitter:description" content="Helping ambitious organisations harness digital transformation, responsible AI and innovation — from healthcare to any mission-driven field." />
   <meta name="twitter:image" content="Profile.jpg" />
 
+  <link rel="preload" as="image" href="Profile2.jpg">
+  <link rel="icon" href="favicon.ico" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
   <header class="site-header">
-    <div class="container">
+    <div class="header-container">
       <div class="brand" aria-label="PalsaIQ brand">PalsaIQ</div>
+      <img class="brand-logo" src="logo.png" alt="PalsaIQ Logo" />
     </div>
   </header>
 
@@ -42,14 +45,25 @@
             </p>
           </div>
 
-          <figure class="portrait" aria-label="Portrait">
+          <button class="profile-swap" type="button" aria-label="Toggle portrait">
             <img
+              class="profile-img profile-img--1"
               src="Profile.jpg"
-              alt="Portrait photo"
-              loading="lazy"
-              decoding="async"
+              alt="Portrait of Sammeli Liikkanen"
+              width="220"
+              height="329"
+              loading="eager"
             />
-          </figure>
+            <img
+              class="profile-img profile-img--2"
+              src="Profile2.jpg"
+              alt="Portrait of Sammeli Liikkanen playing bass"
+              aria-hidden="true"
+              width="220"
+              height="329"
+              loading="eager"
+            />
+          </button>
         </div>
       </section>
 
@@ -101,5 +115,7 @@
       <p>© 2025 Sammeli Liikkanen Oy</p>
     </div>
   </footer>
+
+  <script src="snow.js" defer></script>
 </body>
 </html>

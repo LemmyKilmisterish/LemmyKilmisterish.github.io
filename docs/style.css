@@ -1,5 +1,3 @@
-/* PalsaIQ — minimal, modern, responsive one-pager */
-
 :root{
   --blue-base: #4B84C3;
   --blue-900: #122130;
@@ -52,6 +50,14 @@ a:hover{
   margin: 0 auto;
 }
 
+.header-container{
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto;
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+}
+
 .site-header{
   background: linear-gradient(180deg, var(--blue-700) 0%, var(--blue-800) 62%, var(--blue-900) 100%);
   border-bottom: 1px solid rgba(255,255,255,0.10);
@@ -79,6 +85,10 @@ a:hover{
   font-weight: 700;
   letter-spacing: 0.2px;
   font-size: 1.15rem;
+}
+
+.brand-logo {
+  height: 3rem;
 }
 
 .site-main{
@@ -130,17 +140,56 @@ p:last-child{ margin-bottom: 0; }
   color: var(--muted);
   font-size: 1.02rem;
 }
-
-.portrait{
-  margin: 0;
-  justify-self: start;
+.profile-swap{
+  position: relative;
+  display: block;
   width: min(220px, 100%);
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  line-height: 0; /* removes extra inline-gap behavior */
+  margin-left: 0;
+  max-width: 220px;
 }
 
-.portrait img{
+.profile-swap:focus{
+  outline: none;
+}
+
+.profile-swap:focus-visible{
+  box-shadow: var(--shadow);
+}
+
+.profile-swap .profile-img{
   border-radius: 6px;
-  border: 1px solid rgba(18,33,48,0.12);
-  box-shadow: 0 14px 40px rgba(18, 33, 48, 0.18);
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 160ms ease, transform 260ms ease;
+}
+
+/* Second image sits on top */
+.profile-swap .profile-img--2{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.01);
+}
+
+/* Swap states: hover (mouse) + focus/active (touch) */
+.profile-swap:is(:hover, :focus, :active) .profile-img--1{
+  opacity: 0;
+  transform: scale(0.99);
+}
+
+.profile-swap:is(:hover, :focus, :active) .profile-img--2{
+  opacity: 1;
+  transform: scale(1);
 }
 
 .clean-list{
@@ -155,8 +204,9 @@ p:last-child{ margin-bottom: 0; }
   padding: 0.55rem 0.65rem;
   border-radius: 6px;
   border: 1px solid rgba(18,33,48,0.08);
-  background: rgba(246,247,248,0.88);
-  color: var(--muted);
+  background: rgba(246, 247, 248);
+  color: var(--blue-800);
+  font-weight: 550;
   box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
 }
 
@@ -209,11 +259,9 @@ p:last-child{ margin-bottom: 0; }
     grid-template-columns: 1.35fr 0.65fr;
     gap: 1.5rem;
   }
-
-  .portrait{
-    justify-self: end;
+  .profile-swap{
+    margin-left: auto;
   }
-
   .card{
     padding: 1.35rem 1.5rem;
   }
@@ -221,4 +269,7 @@ p:last-child{ margin-bottom: 0; }
 
 @media (prefers-reduced-motion: reduce){
   *{ scroll-behavior: auto !important; }
+    .profile-swap .profile-img{
+    transition: none;
+  }
 }
