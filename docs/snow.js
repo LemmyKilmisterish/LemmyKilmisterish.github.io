@@ -658,6 +658,7 @@ var snowStorm = (function(window, document) {
   // hooks for starting the snow
   if (storm.autoStart) {
     storm.events.add(window, 'load', doStart, false);
+    setTimeout(storm.stop, 10000);
   }
 
   return this;
